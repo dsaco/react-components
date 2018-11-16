@@ -28,7 +28,7 @@ export default class extends Component {
                 <button onClick={this.turn}>turn</button>
                 <hr />
                 <Img src="//www.baidu.com/img/baidu_jgylogo3.gif" />
-                <Img style={{width: 300, height: 200}} src="https://cdn.ds-or.com/article/cover/1502977845_w_720_h_474_bvpqz.jpg" />
+                <Img style={{width: 300, height: 50}} src="https://cdn.ds-or.com/article/cover/1502977845_w_720_h_474_bvpqz.jpg" />
 
 
             </div>

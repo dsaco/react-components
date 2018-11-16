@@ -5,6 +5,17 @@ import { Motion, spring } from 'react-motion';
 let modalInstance;
 
 export default class Img extends Component {
+    state = {
+        loaded: false,
+    }
+    componentDidMount() {
+        // const { src } = this.props;
+        // const img = new Image();
+        // img.src = src;
+        // img.onload = () => {
+        //     this.setState({ loaded: true });
+        // }
+    }
     preview = (e) => {
         const { x, y, width, height } = this.img.getBoundingClientRect();
         getInstance(instance => {
@@ -18,9 +29,10 @@ export default class Img extends Component {
         })
     }
     render() {
+        const { loaded } = this.state;
         return (
             <img ref={img => this.img = img} onClick={this.preview} {...this.props} />
-        )
+        );
     }
 }
 
@@ -52,12 +64,29 @@ class Modal extends Component {
             img.src = src;
             img.onload = () => {
                 const { left, top, width, height } = other;
+
+                let offsetX = (clientWidth - width) / 2 - left;
+                let offsetY = (clientHeight - height) / 2 - top;
+                let scaleW = img.width / width;
+                let scaleH = img.height / height;
+
+
+                if (img.width > clientWidth) {
+                    scaleW = clientWidth / width;
+                    scaleH = img.height / img.width * clientWidth / height;  
+                } else if (img.height > clientHeight) {
+                    // scaleH = clientHeight / height;
+                    // scaleW = 
+                }
+
+
+
                 this.setState({
                     newStyle: { 
-                        offsetX: (clientWidth - width) / 2 - left,
-                        offsetY: (clientHeight - height) / 2 - top,
-                        scaleW: img.width / width,
-                        scaleH: img.height / height,
+                        offsetX,
+                        offsetY,
+                        scaleW,
+                        scaleH,
                         opacity: 1,
                     },
                     rgbOpacity: 30,
