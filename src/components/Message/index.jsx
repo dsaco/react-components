@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Transition } from 'react-spring';
+
 
 const now = Date.now();
 let key = 1;
@@ -24,9 +25,9 @@ class Notice extends PureComponent {
         }
     }
     render() {
-        const { type } = this.props;
+        const { type, ...other } = this.props;
         return (
-            <div className={`ds-message-item ${type}`}>
+            <div className={`ds-message-item ${type}`} {...other}>
                 {this.props.children}
             </div>
         )
@@ -54,18 +55,30 @@ export class Notification extends PureComponent {
     render() {
         const { notices } = this.state;
         return (
-            <TransitionGroup component={null}>
+            <Transition
+                items={notices} keys={item => item.key}
+                from={{transform: 'translateY(100%)', opacity: 0}}
+                enter={{transform: 'translateY(0)', opacity: 1}}
+                leave={{transform: 'translateY(-100%)', opacity: 0}}
+            >
                 {
-                    notices.map(notice => {
-                        return (
-                            <CSSTransition key={notice.key} timeout={500} classNames="ds-message-item">
-                                <Notice type={notice.type} onClose={() => this.remove(notice.key)} >{notice.msg}</Notice>
-                            </CSSTransition>
-                        )
-                    })
+                    item => props => <Notice style={props} type={item.type} onClose={() => this.remove(item.key)} >{item.msg}</Notice>
                 }
-            </TransitionGroup>
-        )
+            </Transition>
+        );
+        // return (
+        //     <TransitionGroup component={null}>
+        //         {
+        //             notices.map(notice => {
+        //                 return (
+        //                     <CSSTransition key={notice.key} timeout={500} classNames="ds-message-item">
+        //                         <Notice type={notice.type} onClose={() => this.remove(notice.key)} >{notice.msg}</Notice>
+        //                     </CSSTransition>
+        //                 )
+        //             })
+        //         }
+        //     </TransitionGroup>
+        // )
     }
 }
 

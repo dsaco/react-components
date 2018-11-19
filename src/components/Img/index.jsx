@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Motion, spring } from 'react-motion';
+import { Spring, Transition } from 'react-spring';
 
 let modalInstance;
 
@@ -44,16 +44,16 @@ class Modal extends Component {
         src: '',
         newStyle: {},
         style: {},
-        rgbOpacity: 1,
     }
     open = ({src, ...other}) => {
         const clientWidth = document.documentElement.clientWidth;
         const clientHeight = document.documentElement.clientHeight;
 
+        document.body.classList.add('body-no-scroll');
         this.setState({
             show: true,
             src,
-            style: Object.assign({}, other),
+            style: {...other},
             newStyle: {
                 offsetX: 0,
                 offsetY: 0,
@@ -96,7 +96,6 @@ class Modal extends Component {
                         scaleH,
                         opacity: 1,
                     },
-                    rgbOpacity: 30,
                 });
             }
         })
@@ -110,39 +109,48 @@ class Modal extends Component {
                 scaleH: 1,
                 opacity: 0,
             },
-            rgbOpacity: 0,
-        }, () => {
-            setTimeout(() => {
-                this.setState({show: false})
-            }, 300);
-        })
+            show: false,
+        });
+        document.body.classList.remove('body-no-scroll');
     }
     render() {
-        const { show, src, newStyle, style, rgbOpacity } = this.state;
+        const { show, src, newStyle, style } = this.state;
         const { offsetX, offsetY, scaleW, scaleH, opacity } = newStyle;
-        if (show) {
-            return (
-                <div className="ds-modal" style={{backgroundColor: `rgba(0, 0, 0, 0.${rgbOpacity})`}} onClick={this.close}>
-                    <Motion style={{
-                        offsetX: spring(offsetX),
-                        offsetY: spring(offsetY),
-                        scaleW: spring(scaleW),
-                        scaleH: spring(scaleH),
-                        opacity: spring(opacity),
-                    }} >
-                        {
-                            ({ offsetX, offsetY, scaleW, scaleH, opacity }) =>
-                            <img style={Object.assign({}, style, {
-                                transform: `translate(${offsetX}px, ${offsetY}px) scale(${scaleW}, ${scaleH})`,
-                                opacity,
-                            })} className="ds-modal-img" src={src} />
-                        }
-                    </Motion>
-                </div>
-            );
-        } else {
-            return null;
-        }
+
+        return (
+            <Transition
+                items={show}
+                from={{backgroundColor: 'rgba(0, 0, 0, 0)'}}
+                enter={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}
+                leave={{backgroundColor: 'rgba(0, 0, 0, 0)'}}
+            >
+                {
+                    show =>
+                    show && (
+                        props1 => (
+                            <div className="ds-modal" style={props1} onClick={this.close}>
+                                <Spring
+                                    from={{
+                                        transform: `translate(${offsetX}px, ${offsetY}px) scale(${scaleW}, ${scaleH})`, 
+                                        opacity,
+                                    }}
+                                    to={{
+                                        transform: `translate(${offsetX}px, ${offsetY}px) scale(${scaleW}, ${scaleH})`,
+                                        opacity,
+                                    }}
+                                >
+                                    {
+                                        props => (
+                                            <img style={{...style, ...props}} className="ds-modal-img" src={src} />
+                                        )
+                                    }
+                                </Spring>
+                            </div>
+                        )
+                    )
+                }
+            </Transition>
+        )
     }
 }
 
