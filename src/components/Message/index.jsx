@@ -106,6 +106,11 @@ export default class Message {
             instance.add(msg);
         })
     }
+    static dark = (msg) => {
+        getMessageInstance((instance) => {
+            instance.add(msg, 'dark');
+        })
+    }
     static info = (msg) => {
         getMessageInstance((instance) => {
             instance.add(msg, 'info');

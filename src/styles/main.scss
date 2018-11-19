@@ -35,6 +35,10 @@
         &.warn {
             border-left: 5px solid rgb(250, 173, 20);
         }
+        &.dark {
+            background-color: rgba(black, .7);
+            color: white;
+        }
         &-enter {
             opacity: 0.01;
             transform: translateY(-100%);

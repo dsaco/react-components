@@ -14,6 +14,9 @@ export default class extends Component {
     warn = () => {
         Message.warn(Date.now())
     }
+    dark = () => {
+        Message.dark(Date.now())
+    }
     turn = () => {
         Message.config({
             duration: 10,
@@ -25,9 +28,10 @@ export default class extends Component {
                 <button onClick={this.add}>add</button>
                 <button onClick={this.info}>info</button>
                 <button onClick={this.warn}>warn</button>
+                <button onClick={this.dark}>dark</button>
                 <button onClick={this.turn}>turn</button>
                 <hr />
-                <Img src="//www.baidu.com/img/baidu_jgylogo3.gif" />
+                <Img style={{width: 300, height: 400}} src="https://cdn.ds-or.com/article/image/1530024245_w_1080_h_1920_cz22e.png" />
                 <Img style={{width: 300, height: 50}} src="https://cdn.ds-or.com/article/cover/1502977845_w_720_h_474_bvpqz.jpg" />
 
 
