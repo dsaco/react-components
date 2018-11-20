@@ -66,19 +66,6 @@ export class Notification extends PureComponent {
                 }
             </Transition>
         );
-        // return (
-        //     <TransitionGroup component={null}>
-        //         {
-        //             notices.map(notice => {
-        //                 return (
-        //                     <CSSTransition key={notice.key} timeout={500} classNames="ds-message-item">
-        //                         <Notice type={notice.type} onClose={() => this.remove(notice.key)} >{notice.msg}</Notice>
-        //                     </CSSTransition>
-        //                 )
-        //             })
-        //         }
-        //     </TransitionGroup>
-        // )
     }
 }
 

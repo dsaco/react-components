@@ -128,7 +128,10 @@ class Modal extends Component {
                     show =>
                     show && (
                         props1 => (
-                            <div className="ds-modal" style={props1} onClick={this.close}>
+                            <div style={{
+                                position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                                ...props1,
+                                }} onClick={this.close}>
                                 <Spring
                                     from={{
                                         transform: `translate(${offsetX}px, ${offsetY}px) scale(${scaleW}, ${scaleH})`, 
@@ -141,7 +144,7 @@ class Modal extends Component {
                                 >
                                     {
                                         props => (
-                                            <img style={{...style, ...props}} className="ds-modal-img" src={src} />
+                                            <img style={{position: 'absolute', ...style, ...props}} src={src} />
                                         )
                                     }
                                 </Spring>

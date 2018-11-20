@@ -1,11 +1,12 @@
 {
   "name": "ds-rc",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "scripts": {
-    "start": "webpack-dev-server --progress",
+    "start": "webpack-dev-server",
     "clean": "rimraf lib",
     "lib": "babel src/components/ --out-dir lib/",
-    "pub": "npm run clean && npm run lib"
+    "pub": "npm run clean && npm run lib && npm run style",
+    "style": "sass src/components:lib/ --style compressed --no-source-map"
   },
   "main": "lib/index.js",
   "author": "dsaco",
@@ -19,7 +20,6 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
-    "@babel/runtime": "^7.1.5",
     "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.1",
@@ -33,6 +33,7 @@
     "react-hot-loader": "^4.3.12",
     "react-router-dom": "^4.3.1",
     "rimraf": "^2.6.2",
+    "sass": "^1.15.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
@@ -42,10 +43,11 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.5",
     "react-spring": "^6.1.8"
   },
   "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
   }
 }
