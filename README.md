@@ -2,7 +2,7 @@
 #### all
 ```
 import { Message, Img, Button } from 'ds-rc';
-import 'ds-rc/style.css';
+import 'ds-rc/lib/style.css';
 ```
 #### dynamic
 ```
