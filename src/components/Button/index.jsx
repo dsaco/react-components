@@ -8,11 +8,11 @@ export default class Button extends Component {
         style: {},
         className: '',
         color: '',
-        variant: '',
+        variant: 'default',
+        disabled: false,
     }
     state = {
         ripples: [],
-        isActive: false,
     }
     firstTouch = 0
     onMouseDown = (e) => {
@@ -27,28 +27,28 @@ export default class Button extends Component {
         }
         const { ripples } = this.state;
         ripples.push(r);
-        this.setState({ripples, isActive: true});
+        this.setState({ripples});
     }
     remove = () => {
         const now = Date.now();
         const cha = now - this.firstTouch;
         if (cha > 500) {
-            this.setState({ripples: [], isActive: false});
+            this.setState({ripples: []});
         } else {
             setTimeout(() => {
                 const { ripples } = this.state;
                 ripples.shift();
-                this.setState({ripples, isActive: false});
+                this.setState({ripples});
             }, 550 - cha);
         }
     }
     render() {
-        const { ripples, isActive } = this.state;
-        const { style, className, color, variant } = this.props;
+        const { ripples } = this.state;
+        const { style, className, color, variant, disabled } = this.props;
         return (
             <button 
                 style={style} 
-                className={`${className} ds-button ${variant} ${color} ${isActive ? 'active': ''}`} 
+                className={`${className} ds-button ${variant} ${color} ${disabled ? 'disabled' : ''}`} 
                 onClick={this.props.onClick} 
                 onMouseDown={this.onMouseDown} 
                 onMouseLeave={this.remove} 
@@ -78,5 +78,6 @@ export default class Button extends Component {
 Button.propTypes = {
     onClick: PropTypes.func.isRequired,
     color: PropTypes.oneOf(['primary', 'secondary', '']),
-    variant: PropTypes.oneOf(['outline', 'text', '']),
+    variant: PropTypes.oneOf(['outline', 'text', 'default']),
+    disabled: PropTypes.bool,
 }

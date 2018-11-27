@@ -1,29 +1,24 @@
 import React from 'react';
 
-import Button from '../../components/Button';
+import Progress from '../../components/Progress';
 
 export default class extends React.Component {
 
-    add = () => {
+    start = () => {
+        Progress.start();
+    }
+    inc = () => {
+        Progress.inc();
+    }
+    done = () => {
+        Progress.done();
     }
     render() {
         return (
             <div>
-                <hr />
-                <Button style={{marginRight: 10}} onClick={() => console.log('default')}>default</Button>
-                <Button color="primary" style={{marginRight: 10}} onClick={() => console.log('primary')}>primary</Button>
-                <Button color="secondary" onClick={() => console.log('secondary')}>secondary</Button>
-                <hr />
-                <Button variant="outline" style={{marginRight: 10}} onClick={() => console.log('default')}>default</Button>
-                <Button variant="outline" color="primary" style={{marginRight: 10}} onClick={() => console.log('primary')}>primary</Button>
-                <Button variant="outline" color="secondary" style={{marginRight: 10}} onClick={() => console.log('primary')}>primary</Button>
-                <hr />
-                <Button variant="text" style={{marginRight: 10}} onClick={() => console.log('default')}>default</Button>
-                <Button variant="text" color="primary" style={{marginRight: 10}} onClick={() => console.log('primary')}>primary</Button>
-                <Button variant="text" color="secondary" style={{marginRight: 10}} onClick={() => console.log('primary')}>primary</Button>
-                <hr />
-
-                <Button style={{width: 50, height: 50, borderRadius: '50%'}} color="primary" onClick={() => console.log('secondary')}>+</Button>
+                <button onClick={this.start}>strat</button>
+                <button onClick={this.inc}>inc</button>
+                <button onClick={this.done}>done</button>
             </div>
         )
     }

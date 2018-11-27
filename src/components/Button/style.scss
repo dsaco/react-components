@@ -1,16 +1,27 @@
-
 $color-primary:#2196f3 !default;
 $color-secondary:#e10050 !default;
 
+@mixin ds-variant-color($color) {
+    color: $color;
+    &:hover {
+        background-color: rgba($color, 0.08);
+    }
+    .ds-button-cover {
+        div {
+            background-color: rgba($color, 0.3);
+        }
+    }
+}
+
 .ds-button {
-    padding: 8px 16px;
-    font-size: 0.875rem;
-    // min-width: 64px;
     min-height: 36px;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    padding: 8px 16px;
     border-radius: 4px;
-    cursor: pointer;
+    border: 0;
     outline: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
     position: relative;
     user-select: none;
     display: inline-flex;
@@ -18,83 +29,88 @@ $color-secondary:#e10050 !default;
     align-items: center;
     -webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
-    border: 0;
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
-    font-weight: 500;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     text-transform: uppercase;
     
-    &.active{
-        box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-    }
-    color: rgba(black, .87);
-    background-color: rgb(224, 224, 224);
-    &:hover {
-        background-color: #d5d5d5;
-    }
-    &.primary {
-        color: #fff;
-        background-color: $color-primary;
-        &:hover{
-            background-color: darken($color-primary, 10%);
+    &.default {
+        color: rgba(black, .87);
+        background-color: rgb(224, 224, 224);
+        &:active{
+            box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
         }
-        .ds-button-cover {
-            div {
-                background-color: rgba(white, .3);
+        &:hover {
+            background-color: #d5d5d5;
+        }
+        &.primary {
+            color: #fff;
+            background-color: $color-primary;
+            &:hover{
+                background-color: darken($color-primary, 10%);
+            }
+            .ds-button-cover {
+                div {
+                    background-color: rgba(white, .3);
+                }
             }
         }
-    }
-    &.secondary {
-        color: #fff;
-        background-color: $color-secondary;
-        &:hover{
-            background-color: darken($color-secondary, 10%);
-        }
-        .ds-button-cover {
-            div {
-                background-color: rgba(white, .3);
+        &.secondary {
+            color: #fff;
+            background-color: $color-secondary;
+            &:hover{
+                background-color: darken($color-secondary, 10%);
+            }
+            .ds-button-cover {
+                div {
+                    background-color: rgba(white, .3);
+                }
             }
         }
+        &.disabled {
+            pointer-events: none;
+            color: rgba(0, 0, 0, 0.26);
+            box-shadow: none;
+            background-color: rgba(0, 0, 0, 0.12);
+        }
     }
-    &.outline, &.text {
+    &.outline {
+        border: 1px solid rgba(0, 0, 0, 0.23);
         background-color: transparent;
         box-shadow: none;
         &:hover {
             background-color: rgba(0, 0, 0, 0.08);
         }
         &.primary {
-            color: $color-primary;
-            &:hover {
-                background-color:   rgba($color-primary, 0.08);
-            }
-            .ds-button-cover {
-                div {
-                    background-color: rgba($color-primary, 0.3);
-                }
-            }
-        }
-        &.secondary {
-            color: $color-secondary;
-            &:hover {
-                background-color:   rgba($color-secondary, 0.08);
-            }
-            .ds-button-cover {
-                div {
-                    background-color: rgba($color-secondary, 0.3);
-                }
-            }
-        }
-    }
-    &.outline {
-        border: 1px solid rgba(0, 0, 0, 0.23);
-        &.primary {
             border: 1px solid rgba($color-primary, 0.5);
+            @include ds-variant-color($color-primary);
         }
         &.secondary {
             border: 1px solid rgba($color-secondary, 0.5);
+            @include ds-variant-color($color-secondary);
+        }
+        &.disabled {
+            pointer-events: none;
+            color: rgba(0, 0, 0, .26) !important;
+            border: 1px solid rgba(0, 0, 0, .23) !important;
         }
     }
-
-
+    &.text {
+        background-color: transparent;
+        box-shadow: none;
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.08);
+        }
+        &.primary {
+            @include ds-variant-color($color-primary);
+        }
+        &.secondary {
+            @include ds-variant-color($color-secondary);
+        }
+        &.disabled {
+            pointer-events: none;
+            color: rgba(0, 0, 0, .26);
+        }
+    }
     &-cover {
         position: absolute;
         pointer-events: none;

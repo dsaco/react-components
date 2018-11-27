@@ -57,9 +57,9 @@ export class Notification extends PureComponent {
         return (
             <Transition
                 items={notices} keys={item => item.key}
-                from={{transform: 'translateY(100%)', opacity: 0}}
-                enter={{transform: 'translateY(0)', opacity: 1}}
-                leave={{transform: 'translateY(-100%)', opacity: 0}}
+                from={{opacity: 0, height: 0, marginBottom: 12}}
+                enter={{opacity: 1, height: 30, marginBottom: 12}}
+                leave={{opacity: 0, height: 0, marginBottom: 0}}
             >
                 {
                     item => props => <Notice style={props} type={item.type} onClose={() => this.remove(item.key)} >{item.msg}</Notice>

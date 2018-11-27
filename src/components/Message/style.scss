@@ -12,12 +12,13 @@
     .ds-message-item {
         background-color: white;
         box-shadow: 0 4px 12px rgba(black, .15);
-        padding: 6px 12px;
         border-radius: 3px;
         font-size: 14px;
-        &:not(:last-child) {
-            margin-bottom: 12px;
-        }
+        padding: 0 12px;
+        line-height: 30px;
+        height: 30px;
+        box-sizing: border-box;
+        overflow: hidden;
         &.info {
             border-left: 5px solid rgb(64, 169, 255);
         }

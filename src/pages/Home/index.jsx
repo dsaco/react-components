@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Message from '../../components/Message';
-import Img from '../../components/Img';
 
 export default class extends Component {
   
@@ -10,6 +9,9 @@ export default class extends Component {
     }
     info = () => {
         Message.info(Date.now())
+    }
+    success = () => {
+        Message.success(Date.now())
     }
     warn = () => {
         Message.warn(Date.now())
@@ -26,15 +28,11 @@ export default class extends Component {
         return (
             <div>
                 <button onClick={this.add}>add</button>
+                <button onClick={this.success}>success</button>
                 <button onClick={this.info}>info</button>
                 <button onClick={this.warn}>warn</button>
                 <button onClick={this.dark}>dark</button>
-                <button onClick={this.turn}>turn</button>
-                <hr />
-                <Img style={{width: 300, height: 400}} src="https://cdn.ds-or.com/article/image/1530024245_w_1080_h_1920_cz22e.png" />
-                <Img style={{width: 300, height: 50}} src="https://cdn.ds-or.com/article/cover/1502977845_w_720_h_474_bvpqz.jpg" />
-
-
+                <button onClick={this.turn}>config</button>
             </div>
         )
     }
