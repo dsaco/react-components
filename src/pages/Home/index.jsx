@@ -21,7 +21,7 @@ export default class extends Component {
     }
     turn = () => {
         Message.config({
-            duration: 10,
+            duration: 5,
         })
     }
     render() {
@@ -32,7 +32,7 @@ export default class extends Component {
                 <button onClick={this.info}>info</button>
                 <button onClick={this.warn}>warn</button>
                 <button onClick={this.dark}>dark</button>
-                <button onClick={this.turn}>config</button>
+                <button onClick={this.turn}>config 5s</button>
             </div>
         )
     }

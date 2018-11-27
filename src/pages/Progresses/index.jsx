@@ -6,9 +6,6 @@ export default class extends Component {
     start = () => {
         Progress.start();
     }
-    inc = () => {
-        Progress.inc();
-    }
     done = () => {
         Progress.done();
     }
@@ -16,7 +13,6 @@ export default class extends Component {
         return (
             <div>
                 <button onClick={this.start}>strat</button>
-                <button onClick={this.inc}>inc</button>
                 <button onClick={this.done}>done</button>
             </div>
         );

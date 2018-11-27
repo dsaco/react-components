@@ -1,0 +1,28 @@
+.ds-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    &-inner {
+        width: 100%;
+        height: 100%;
+        background-color: #29d;
+        transform: scaleX(.5);
+        transform-origin: left;
+        transition: transform 300ms;
+        animation: ds-progress-light 1s linear infinite alternate;
+        position: relative;
+    }
+}
+
+@keyframes ds-progress-light {
+    from {
+        // opacity: .4;
+        box-shadow: 0 0 6px deeppink;
+    }
+    to {
+        // opacity: 1;
+        box-shadow: 0 0 1px deeppink;
+    }
+}
