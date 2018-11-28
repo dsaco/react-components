@@ -1,6 +1,6 @@
 {
   "name": "ds-rc",
-  "version": "1.3.13",
+  "version": "1.3.14",
   "scripts": {
     "start": "webpack-dev-server",
     "clean": "rimraf lib",
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/dsaco/react-components.git"
   },
-  "keywords": ["react-components"],
+  "keywords": ["react", "ui-kit", "react-compontents", "css"],
   "bugs": {
     "url": "https://github.com/dsaco/react-components/issues"
   },
