@@ -5,11 +5,11 @@
 npm i -S ds-or
 ```
 
-- [x] Img
-- [x] Button
-- [x] Message
-- [x] Progress
-- [x] Pagination
+- [x] [Img](#Img)
+- [x] [Button](#Button)
+- [x] [Message](#Message)
+- [x] [Progress](#Progress)
+- [x] [Pagination](#Pagination)
 - [ ] Select
 - [ ] Input
 - [ ] tagsInput
@@ -30,6 +30,8 @@ import 'ds-rc/lib/style.css';
 ```
 
 ### Img
+[codesandbox](https://codesandbox.io/s/qv08q61939)
+
 类似知乎网页端的图片查看效果,仅添加了一个点击事件,其他和普通img标签没有区别
 
 ![Img](https://cdn.ds-or.com/demo/img.gif)
