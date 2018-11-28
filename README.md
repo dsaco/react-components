@@ -30,7 +30,6 @@ import 'ds-rc/lib/style.css';
 ```
 
 ### Img
-[codesandbox](https://codesandbox.io/s/qv08q61939)
 
 类似知乎网页端的图片查看效果,仅添加了一个点击事件,其他和普通img标签没有区别
 
@@ -44,6 +43,8 @@ import 'ds-rc/lib/Img/style.css';
 
 
 ### Button
+[codesandbox](https://codesandbox.io/s/qv08q61939)
+
 仿material-ui 水涟漪效果按钮
 
 ![Button](https://cdn.ds-or.com/demo/button.gif)
