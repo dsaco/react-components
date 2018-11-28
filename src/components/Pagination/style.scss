@@ -4,17 +4,28 @@
     margin: 0;
     display: flex;
     &-item {
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
         text-align: center;
         border: 1px solid #ccc;
         cursor: pointer;
         user-select: none;
-        min-width: 32px;
-        &-active {
-            color: red;
+        min-width: 28px;
+        height: 28px;
+        line-height: 28px;
+        border-radius: 3px;
+        font-size: 14px;
+        color: #333;
+        transition: color 250ms, border-color 250ms;
+        &-active, &:hover {
+            color: #1890ff;
+            border-color: #40a9ff;
         }
         &.disabled {
-            color: blue;
+            color: #ccc;
             cursor: not-allowed;
+            border-color: #ccc;
         }
     }
 }

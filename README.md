@@ -4,7 +4,7 @@
 ```
 npm i -S ds-or
 ```
-- todo 分页器(Pagination)
+- ~~todo 分页器(Pagination)~~
 - 如果有人用的话,我会加上自定义样式等继续完善下去
 - 有任何问题请提issue
 - 暂时没有适配移动端
@@ -41,7 +41,7 @@ import 'ds-rc/lib/Button/style.css';
 ```
 
 ### Message (API)
-仿ant-design message toast
+仿ant-design message
 ![Message](https://cdn.ds-or.com/demo/message.gif)
 ```
 import Message from 'ds-rc/lib/Message';
@@ -70,4 +70,20 @@ import 'ds-rc/lib/Progress/style.css';
 Progress.start();
 Progress.done();
 
+```
+
+### Pagination
+仿ant-design pagination
+![Message](https://cdn.ds-or.com/demo/pagination.gif)
+| propName | desc | default |
+|:---:|:---:|:---:|
+|total|总条数|required(必填)|
+|defaultCurrent|默认索引|1|
+|pageSize|每一页条数|15|
+|onChange|回调函数|noop|
+```
+import Pagination from 'ds-rc/lib/Pagination';
+import 'ds-rc/lib/Pagination/style.css';
+
+<Pagination defaultCurrent={3} pageSize={10} onChange={(current) => console.log(current)} total={200} />
 ```
