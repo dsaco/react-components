@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 
 import { Transition } from 'react-spring';
 
-
 const now = Date.now();
 let key = 1;
-let messageInstance;
 
 class Notice extends PureComponent {
     static defaultProps = {
@@ -38,13 +36,14 @@ export class Notification extends PureComponent {
     state = {
         notices: [],
     }
-    add(msg, type = ''){
+    add(msg, type = '', config = {}){
         this.setState(prevState => {
             return {
                 notices: prevState.notices.concat({
                     key: `ds-msg-${now}-${key++}`,
                     msg,
                     type,
+                    duration: config.duration,
                 })
             }
         })
@@ -62,78 +61,46 @@ export class Notification extends PureComponent {
                 leave={{opacity: 0, height: 0, marginBottom: 0}}
             >
                 {
-                    item => props => <Notice style={props} type={item.type} onClose={() => this.remove(item.key)} >{item.msg}</Notice>
+                    item => props => <Notice style={props} type={item.type} duration={item.duration} onClose={() => this.remove(item.key)} >{item.msg}</Notice>
                 }
             </Transition>
         );
     }
 }
 
-Notification.instance = function(callback) {
-    const div = document.createElement('div');
-    div.className = 'ds-message';
-    document.body.appendChild(div);
-    let called = false;
+let messageInstance;
 
-    function ref(notification) {
-        if (called) {
-            return;
-        }
-        called = true;
-        callback({
-            add(msg, type) {
-                notification.add(msg, type);
-            }
-        })
-    }
-    ReactDOM.render(<Notification ref={ref} />, div);
-}
-
-function getMessageInstance(callback) {
+function getInst() {
     if (messageInstance) {
-        callback(messageInstance);
-        return;
+        return messageInstance;
+    } else {
+        const div = document.createElement('div');
+        div.className = 'ds-message';
+        document.body.appendChild(div);
+        return messageInstance = ReactDOM.render(<Notification />, div);
     }
-    Notification.instance((notification) => {
-        messageInstance = notification;
-        callback(notification);
-    })
 }
 
 export default class Message {
-    static open = (msg) => {
-        getMessageInstance((instance) => {
-            instance.add(msg);
-        })
+    static open = (msg, config) => {
+        getInst().add(msg, '', config);
     }
-    static dark = (msg) => {
-        getMessageInstance((instance) => {
-            instance.add(msg, 'dark');
-        })
+    static dark = (msg, config) => {
+        getInst().add(msg, 'dark', config);
     }
-    static info = (msg) => {
-        getMessageInstance((instance) => {
-            instance.add(msg, 'info');
-        })
+    static info = (msg, config) => {
+        getInst().add(msg, 'info', config);
     }
-    static warn = (msg) => {
-        getMessageInstance((instance) => {
-            instance.add(msg, 'warn');
-        })
+    static warn = (msg, config) => {
+        getInst().add(msg, 'warn', config);
     }
-    static error = (msg) => {
-        getMessageInstance((instance) => {
-            instance.add(msg, 'error');
-        })
+    static error = (msg, config) => {
+        getInst().add(msg, 'error', config);
     }
-    static success = (msg) => {
-        getMessageInstance((instance) => {
-            instance.add(msg, 'success');
-        })
+    static success = (msg, config) => {
+        getInst().add(msg, 'success', config);
     }
     static config = (options = {}) => {
         Object.assign(Notice.defaultProps, options);
     }
 }
-
-

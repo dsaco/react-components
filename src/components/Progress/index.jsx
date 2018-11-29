@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 
 import { Transition, Spring } from 'react-spring';
 
-let progressInstance;
-
 class ProgressUi extends Component {
     state = {
         percent: 0,
@@ -78,53 +76,24 @@ class ProgressUi extends Component {
         );
     }
 }
-ProgressUi.instance = function(callback) {
-    const div = document.createElement('div');
-    document.body.appendChild(div);
-    let called = false;
 
-    function ref(progress) {
-        if (called) {
-            return;
-        }
-        called = true;
-        callback({
-            start() {
-                progress.start();
-            },
-            done() {
-                progress.done();
-            }
-        })
-    }
-    ReactDOM.render(<ProgressUi ref={ref} />, div);
-}
+let progressInstance;
 
-function getInstance(callback) {
+function getInst() {
     if (progressInstance) {
-        callback(progressInstance);
-        return;
+        return progressInstance;
+    } else {
+        const div = document.createElement('div');
+        document.body.appendChild(div);
+        return progressInstance = ReactDOM.render(<ProgressUi />, div);
     }
-    ProgressUi.instance((progress) => {
-        progressInstance = progress;
-        callback(progress);
-    })
 }
 
 export default class Progress {
     static start = () => {
-        getInstance((instance) => {
-            instance.start();
-        })
-    }
-    static inc = () => {
-        getInstance((instance) => {
-            instance.inc();
-        })
+        getInst().start();
     }
     static done = () => {
-        getInstance((instance) => {
-            instance.done();
-        })
+        getInst().done();
     }
 }

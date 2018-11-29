@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Spring, Transition } from 'react-spring';
 
-let modalInstance;
-
 export default class Img extends Component {
     state = {
         loaded: false,
@@ -48,55 +46,45 @@ class Modal extends Component {
         const clientHeight = document.documentElement.clientHeight;
 
         document.body.classList.add('body-no-scroll');
-        this.setState({
-            show: true,
-            src,
-            style: {...other},
-            newStyle: {
-                offsetX: 0,
-                offsetY: 0,
-                scaleW: 1,
-                scaleH: 1,
-                opacity: 1,
-            },
-        }, () => {
-            const img = new Image();
-            img.src = src;
-            img.onload = () => {
-                const { left, top, width, height } = other;
 
-                let offsetX = (clientWidth - width) / 2 - left;
-                let offsetY = (clientHeight - height) / 2 - top;
-                let scaleW = img.width / width;
-                let scaleH = img.height / height;
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+            const { left, top, width, height } = other;
 
-                if (img.width > clientWidth && img.height > clientHeight) {
-                    if (img.width / img.height > clientWidth / clientHeight) {
-                        scaleW = clientWidth / width;
-                        scaleH = img.height / img.width * clientWidth / height;  
-                    }else {
-                        scaleH = clientHeight / height;
-                        scaleW = img.width / img.height * clientHeight / width;  
-                    }
-                } else if (img.width > clientWidth) {
+            let offsetX = (clientWidth - width) / 2 - left;
+            let offsetY = (clientHeight - height) / 2 - top;
+            let scaleW = img.width / width;
+            let scaleH = img.height / height;
+
+            if (img.width > clientWidth && img.height > clientHeight) {
+                if (img.width / img.height > clientWidth / clientHeight) {
                     scaleW = clientWidth / width;
                     scaleH = img.height / img.width * clientWidth / height;  
-                } else if (img.height > clientHeight) {
+                }else {
                     scaleH = clientHeight / height;
                     scaleW = img.width / img.height * clientHeight / width;  
                 }
-
-                this.setState({
-                    newStyle: { 
-                        offsetX,
-                        offsetY,
-                        scaleW,
-                        scaleH,
-                        opacity: 1,
-                    },
-                });
+            } else if (img.width > clientWidth) {
+                scaleW = clientWidth / width;
+                scaleH = img.height / img.width * clientWidth / height;  
+            } else if (img.height > clientHeight) {
+                scaleH = clientHeight / height;
+                scaleW = img.width / img.height * clientHeight / width;  
             }
-        })
+            this.setState({
+                show: true,
+                src,
+                style: {...other},
+                newStyle: { 
+                    offsetX,
+                    offsetY,
+                    scaleW,
+                    scaleH,
+                    opacity: 1,
+                },
+            });
+        }
     }
     close = () => {
         this.setState({
@@ -132,12 +120,10 @@ class Modal extends Component {
                                 }} onClick={this.close}>
                                 <Spring
                                     from={{
-                                        transform: `translate(${offsetX}px, ${offsetY}px) scale(${scaleW}, ${scaleH})`, 
-                                        opacity,
+                                        transform: `translate(${0}px, ${0}px) scale(${1}, ${1})`, opacity: 1,
                                     }}
                                     to={{
-                                        transform: `translate(${offsetX}px, ${offsetY}px) scale(${scaleW}, ${scaleH})`,
-                                        opacity,
+                                        transform: `translate(${offsetX}px, ${offsetY}px) scale(${scaleW}, ${scaleH})`, opacity,
                                     }}
                                 >
                                     {
@@ -154,6 +140,8 @@ class Modal extends Component {
         )
     }
 }
+
+let modalInstance;
 
 function getInst() {
     if (modalInstance) {
