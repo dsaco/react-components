@@ -21,6 +21,7 @@ npm i -S ds-or
 - [ ] 代码优化
 - [ ] 适配移动端
 
+> 想从react-spring改为react-motion,但是不太合适,暂时放弃了
 > 有任何问题请提issue
 
 > 如果想全部引入,或者不需要按需加载,可以如下
@@ -77,6 +78,8 @@ Message.warn('your');
 Message.error('name');
 Message.success('?');
 
+Message.error('errormsg', {duration: 5});
+
 // default duration 2s;
 Message.config({
     duration: 3
@@ -99,7 +102,7 @@ Progress.done();
 ### Pagination
 仿ant-design pagination
 
-![Message](https://cdn.ds-or.com/demo/pagination.gif)
+![Pagination](https://cdn.ds-or.com/demo/pagination.gif)
 | propName | desc | default |
 |:---:|:---:|:---:|
 |total|总条数|required(必填)|
