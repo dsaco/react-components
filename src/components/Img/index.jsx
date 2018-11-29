@@ -20,14 +20,12 @@ export default class Img extends Component {
         const { loaded } = this.state;
         if (loaded) {
             const { x, y, width, height } = this.img.getBoundingClientRect();
-            getInstance(instance => {
-                instance.open({
-                    left: x,
-                    top: y,
-                    width,
-                    height,
-                    src: this.img.src,
-                });
+            getInst().open({
+                left: x,
+                top: y,
+                width,
+                height,
+                src: this.img.src,
             })
         }
     }
@@ -157,31 +155,12 @@ class Modal extends Component {
     }
 }
 
-Modal.instance = function(callback) {
-    const div = document.createElement('div');
-    document.body.appendChild(div);
-    let called = false;
-    function ref(modal) {
-        if (called) {
-            return;
-        }
-        called = true;
-        callback({
-            open(options) {
-                modal.open(options);
-            }
-        })
-    }
-    ReactDOM.render(<Modal ref={ref} />, div);
-}
-
-function getInstance(callback) {
+function getInst() {
     if (modalInstance) {
-        callback(modalInstance);
-        return;
+        return modalInstance;
+    } else {
+        const div = document.createElement('div');
+        document.body.appendChild(div);
+        return modalInstance = ReactDOM.render(<Modal />, div);
     }
-    Modal.instance((modal) => {
-        modalInstance = modal;
-        callback(modal);
-    })
 }
