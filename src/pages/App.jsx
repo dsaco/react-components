@@ -7,6 +7,7 @@ import Buttons from './Buttons';
 import Imgs from './Imgs';
 import Progresses from './Progresses';
 import Paginations from './Paginations';
+import Switchs from './Switchs';
 
 class App extends Component {
     render() {
@@ -18,6 +19,7 @@ class App extends Component {
                     <Link to="/imgs" >图片预览</Link>
                     <Link to="/progresses" >进度条</Link>
                     <Link to="/paginations" >分页器</Link>
+                    <Link to="/switchs" >Switch</Link>
                 </div>
                 <Switch>
                     <Route path="/" component={Home} exact={true} />
@@ -25,6 +27,7 @@ class App extends Component {
                     <Route path="/imgs" component={Imgs} />
                     <Route path="/progresses" component={Progresses} />
                     <Route path="/paginations" component={Paginations} />
+                    <Route path="/switchs" component={Switchs} />
                 </Switch>
             </React.Fragment>
         );
