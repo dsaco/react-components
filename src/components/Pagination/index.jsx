@@ -87,9 +87,9 @@ export default class Pagination extends Component {
                 {
                     pages.map((page) => {
                         if (page === BEFORE) {
-                            return <li onClick={this.before} className={`ds-pagination-item`} key={page}>«</li>
+                            return <li onClick={this.before} data-place="«" className={`ds-pagination-before-after`} key={page}></li>
                         } else if (page === AFTER) {
-                            return <li onClick={this.after} className={`ds-pagination-item`} key={page}>»</li>
+                            return <li onClick={this.after} data-place="»" className={`ds-pagination-before-after`} key={page}></li>
                         } else {
                             return <li onClick={() => this.goPage(page)} className={`ds-pagination-item ${current === page ? 'ds-pagination-item-active' : ''}`} key={page}>{page}</li>
                         }

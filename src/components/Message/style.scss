@@ -15,22 +15,24 @@
         border-radius: 3px;
         font-size: 14px;
         padding: 0 12px;
-        line-height: 30px;
+        display: flex;
+        align-items: center;
         height: 30px;
         box-sizing: border-box;
         overflow: hidden;
-        &.info {
-            border-left: 5px solid rgb(64, 169, 255);
-        }
-        &.error {
-            border-left: 5px solid red;
-        }
-        &.success {
-            border-left: 5px solid rgb(82, 196, 26);
-        }
-        &.warn {
-            border-left: 5px solid rgb(250, 173, 20);
-        }
+        color: rgba(black, .65);
+        // &.info {
+        //     border-left: 5px solid rgb(64, 169, 255);
+        // }
+        // &.error {
+        //     border-left: 5px solid red;
+        // }
+        // &.success {
+        //     border-left: 5px solid rgb(82, 196, 26);
+        // }
+        // &.warn {
+        //     border-left: 5px solid rgb(250, 173, 20);
+        // }
         &.dark {
             background-color: rgba(black, .7);
             color: white;

@@ -3,24 +3,24 @@ import React, { Component } from 'react';
 import Message from '../../components/Message';
 
 export default class extends Component {
-  
+
     add = () => {
-        Message.open('普通信息')
+        Message.open('普通信息', 3)
     }
     info = () => {
-        Message.info('修改成功')
+        Message.info('修改成功', 4)
     }
     success = () => {
-        Message.success('修改成功')
+        Message.success('修改成功', 5)
     }
     warn = () => {
-        Message.warn('内部错误')
+        Message.warn('内部错误', 6)
     }
     error = () => {
-        Message.error('内部错误 5s', { duration: 5 })
+        Message.error('内部错误 5s', 5)
     }
     dark = () => {
-        Message.dark('黑暗系列')
+        Message.dark('黑暗系列', 10)
     }
     turn = () => {
         Message.config({
