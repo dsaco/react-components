@@ -27,7 +27,7 @@
     .ds-switch {
         display: inline-block;
         position: relative;
-        overflow: hidden; 
+        overflow: hidden;
         &-inner {
             width: 100%;
             height: 100%;
@@ -136,20 +136,20 @@
 
 
 .zxx_text_overflow_4{
-    width:24em; 
-    height:1.3em; 
-    overflow:hidden; 
+    width:24em;
+    height:1.3em;
+    overflow:hidden;
     zoom:1;
     .text_con {
-        float:left; 
-        height:1.3em; 
-        margin-right:3em; 
+        float:left;
+        height:1.3em;
+        margin-right:3em;
         overflow:hidden;
     }
     .text_dotted {
-        width:3em; 
-        height:1.31em; 
-        float:right; 
+        width:3em;
+        height:1.31em;
+        float:right;
         margin-top:-1.3em;
     }
 }
@@ -161,9 +161,8 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-     /* autoprefixer: off */
+     /*! autoprefixer: ignore next */
      -webkit-box-orient: vertical;
-     /* autoprefixer: on */
     // 单行
     // text-overflow: ellipsis;
     // overflow: hidden;

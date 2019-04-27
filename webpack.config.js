@@ -42,17 +42,18 @@ module.exports = {
                             ident: 'postcss',
                             plugins: [
                                 require('autoprefixer')
-                            ]                            
+                            ]
                         }
-                    },  
+                    },
                     'sass-loader',
                 ],
             }
         ],
-    },  
+    },
     devServer: {
         hot: true,
         port: 3000,
+        open: true,
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
