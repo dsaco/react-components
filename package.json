@@ -15,7 +15,12 @@
     "type": "git",
     "url": "git+https://github.com/dsaco/react-components.git"
   },
-  "keywords": ["react", "ui-kit", "react-compontents", "css"],
+  "keywords": [
+    "react",
+    "ui-kit",
+    "react-compontents",
+    "css"
+  ],
   "bugs": {
     "url": "https://github.com/dsaco/react-components/issues"
   },
@@ -29,6 +34,7 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.1.5",
     "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.1",
@@ -37,10 +43,12 @@
     "node-sass": "^4.10.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-hot-loader": "^4.3.12",
     "react-router-dom": "^4.3.1",
+    "react-spring": "^8.0.19",
     "rimraf": "^2.6.2",
     "sass": "^1.15.1",
     "sass-loader": "^7.1.0",
@@ -51,13 +59,8 @@
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
   },
-  "dependencies": {
-    "@babel/runtime": "^7.1.5",
-    "prop-types": "^15.6.2",
-    "react-spring": "^6.1.8"
-  },
   "peerDependencies": {
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   }
 }

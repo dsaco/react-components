@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Transition } from 'react-spring';
+import { Transition } from 'react-spring/renderprops';
 import PropTypes from 'prop-types';
 
 let key = 1;

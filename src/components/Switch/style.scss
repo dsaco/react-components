@@ -99,7 +99,6 @@
         display: inline-block;
         background-color: rgb(221, 221, 221);
         transition: all 500ms;
-        // box-shadow: 2px 0 10px #ccc;
         border-radius: 50%;
         border-top-right-radius: 10%;
         transform: rotate(45deg);
@@ -116,55 +115,4 @@
             border-top-right-radius: 50%;
         }
     }
-}
-
-
-.test {
-    width: 50px;
-    height: 50px;
-    transform: rotate(45deg);
-    border-radius: 50%;
-    border-top-right-radius: 20%;
-    background-color: aqua;
-    transition: border-radius 2s;
-    margin-left: 100px;
-    &:hover {
-        border-bottom-left-radius: -5%;
-        border-top-right-radius: 50%;
-    }
-}
-
-
-.zxx_text_overflow_4{
-    width:24em;
-    height:1.3em;
-    overflow:hidden;
-    zoom:1;
-    .text_con {
-        float:left;
-        height:1.3em;
-        margin-right:3em;
-        overflow:hidden;
-    }
-    .text_dotted {
-        width:3em;
-        height:1.31em;
-        float:right;
-        margin-top:-1.3em;
-    }
-}
-
-.test2 {
-    text-align: justify;
-    // 多行
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-     /*! autoprefixer: ignore next */
-     -webkit-box-orient: vertical;
-    // 单行
-    // text-overflow: ellipsis;
-    // overflow: hidden;
-    // white-space:nowrap;
 }

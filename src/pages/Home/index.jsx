@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 
 import Message from '../../components/Message';
+import Progress from '../../components/Progress';
 
 export default class extends Component {
-
+    state = {
+        visible: false,
+    }
     open = () => {
         Message.open('普通信息', 3)
     }
@@ -32,6 +35,10 @@ export default class extends Component {
                 <button onClick={this.warn}>warn</button>
                 <button onClick={this.error}>error</button>
                 <button onClick={this.dark}>dark</button>
+                <h3>Progress</h3>
+                <button onClick={Progress.start}>strat</button>
+                <button onClick={Progress.done}>done</button>
+                
             </div>
         )
     }

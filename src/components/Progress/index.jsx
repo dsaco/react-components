@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Transition, Spring } from 'react-spring';
+import { Transition } from 'react-spring/renderprops';
 
 class ProgressUi extends Component {
     state = {

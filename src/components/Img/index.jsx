@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Spring, Transition } from 'react-spring';
+import { Spring, Transition } from 'react-spring/renderprops';
 
 export default class Img extends Component {
     state = {

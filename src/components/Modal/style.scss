@@ -15,31 +15,30 @@
         position: relative;
         .ds-dialog-header {
             padding: 16px 24px;
-            color: rgba(black, .65);
+            color: rgba(black, .85);
             border-bottom: 1px solid #e8e8e8;
-            font-weight: bold;
-            font-size: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .ds-dialog-closeable {
-                width: 20px;
-                height: 20px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                font-size: 16px;
-                font-weight: normal;
-                color: #333;
-                transition: color .3s;
-                &:hover {
-                    color: red;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .ds-dialog-closeable {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 16px 24px;
+            cursor: pointer;
+            svg {
+                fill: #777;
+                transition: fill .3s;
+            }
+            &:hover {
+                svg {
+                    fill: #000;
                 }
             }
         }
         .ds-dialog-content {
             padding: 16px 24px;
+            min-height: 100px;
         }
     }
 }
