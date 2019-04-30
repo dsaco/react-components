@@ -2,7 +2,7 @@
 
 ### Install
 ```
-npm i -S ds-or
+npm i -S ds-rc
 ```
 
 - [x] [Img](#Img)
