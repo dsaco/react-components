@@ -44,11 +44,8 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "prop-types": "^15.6.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
     "react-hot-loader": "^4.3.12",
     "react-router-dom": "^4.3.1",
-    "react-spring": "^8.0.19",
     "rimraf": "^2.6.2",
     "sass": "^1.15.1",
     "sass-loader": "^7.1.0",
@@ -59,9 +56,14 @@
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
   },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-spring": "^8.0.19"
+  },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
-    "react-spring": "^8.0.19"
+    "react-spring": ">=8.0.19"
   }
 }
