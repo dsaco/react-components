@@ -9,8 +9,11 @@ class ProgressUi extends Component {
         show: false,
     }
     start = () => {
-        this.setState({show: true});
-        this.work();
+        const { show } = this.state;
+        if (!show) {
+            this.setState({show: true});
+            this.work();
+        }
     }
     work = () => {
         this.timer = setTimeout(() => {
@@ -90,10 +93,6 @@ function getInst() {
 }
 
 export default class Progress {
-    static start = () => {
-        getInst().start();
-    }
-    static done = () => {
-        getInst().done();
-    }
+    static start = getInst().start;
+    static done = getInst().done;
 }
