@@ -10,6 +10,8 @@ npm i -S ds-rc
 - [x] [Message](#Message)
 - [x] [Progress](#Progress)
 - [x] [Pagination](#Pagination)
+- [x] [Switch](#)
+- [x] [Modal](#)
 - [ ] Select
 - [ ] Input
 - [ ] tagsInput
@@ -103,6 +105,7 @@ Progress.done();
 仿ant-design pagination
 
 ![Pagination](https://cdn.ds-or.com/demo/pagination.gif)
+
 | propName | desc | default |
 |:---:|:---:|:---:|
 |total|总条数|required(必填)|
