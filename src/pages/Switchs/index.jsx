@@ -9,11 +9,9 @@ export default class extends Component {
     render() {
         return (
             <div>
-                <Switch onChange={(value) => this.setState({value})} value={this.state.value} />
+                <Switch color="red" onChange={(value) => this.setState({value})} value={this.state.value} />
                 <hr />
-                <Switch.Basic onChange={(value) => this.setState({value})} value={this.state.value} />
-                <hr />
-                <Switch.Water onChange={(value) => this.setState({value})} value={this.state.value} />
+                <Switch.Move color="rgb(87, 231, 128)" onChange={(value) => this.setState({value})} value={this.state.value} />
             </div>
         );
     }
