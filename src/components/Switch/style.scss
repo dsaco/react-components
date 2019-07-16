@@ -1,3 +1,5 @@
+$ds-switch-width: 50px !default;
+
 .ds-switch-border-round {
     border-top-left-radius: 25% 50%;
     border-bottom-left-radius: 25% 50%;
@@ -7,13 +9,13 @@
 .ds-switch-box {
     display: inline-block;
     padding: 2px;
-    width: 50px;
-    height: 25px;
+    width: $ds-switch-width;
+    height: $ds-switch-width / 2;
     cursor: pointer;
     background-color: rgb(238, 238, 238);
     position: relative;
     @extend .ds-switch-border-round;
-    .ds-switch {
+    .ds-switch-content {
         width: 100%;
         height: 100%;
         background-color: rgb(245, 245, 245);
@@ -22,36 +24,11 @@
     }
 }
 
-.ds-switch-1 {
-    @extend .ds-switch-box;
-    .ds-switch {
-        display: inline-block;
-        position: relative;
-        overflow: hidden;
-        &-inner {
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            transform: translateX(-50%);
-            transition: transform .3s;
-            box-shadow: 2px 0 10px #ccc;
-            @extend .ds-switch-border-round;
-        }
-    }
-    &.checked {
-        .ds-switch {
-            background-color: rgb(87, 231, 128);
-            .ds-switch-inner {
-                transform: translateX(50%);
-            }
-        }
-    }
-}
 
-.ds-switch-2 {
+.ds-switch-basic {
     @extend .ds-switch-box;
-    .ds-switch {
-        &-inner {
+    .ds-switch-content {
+        .ds-switch-inner {
             width: 50%;
             height: 0;
             padding-bottom: 50%;
@@ -63,8 +40,7 @@
         }
     }
     &.checked {
-        .ds-switch {
-            background-color: rgb(24, 144, 255);
+        .ds-switch-content {
             .ds-switch-inner {
                 transform: translateX(100%);
             }
@@ -72,8 +48,32 @@
     }
 }
 
+.ds-switch-move {
+    @extend .ds-switch-box;
+    .ds-switch-content {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        .ds-switch-inner {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            transform: translateX(-50%);
+            transition: transform .3s;
+            box-shadow: 2px 0 10px #ccc;
+            @extend .ds-switch-border-round;
+        }
+    }
+    &.checked {
+        .ds-switch-content {
+            .ds-switch-inner {
+                transform: translateX(50%);
+            }
+        }
+    }
+}
 
-.ds-switch-3 {
+.ds-switch-water {
     display: inline-block;
     width: 40px;
     height: 20px;

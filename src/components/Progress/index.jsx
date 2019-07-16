@@ -66,9 +66,9 @@ class ProgressUi extends Component {
                 leave={{opacity: 0}}
             >
                 {
-                    show =>
+                    (show) =>
                     show && (
-                        props => (
+                        (props) => (
                             <div style={props} className="ds-progress">
                                 <div style={{transform: `scaleX(${percent / 100})`}} className="ds-progress-inner"></div>
                             </div>
