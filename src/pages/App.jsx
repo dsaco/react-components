@@ -8,6 +8,7 @@ import Imgs from './Imgs';
 import Paginations from './Paginations';
 import Switchs from './Switchs';
 import Modals from './Modals';
+import DropDowns from './DropDowns';
 
 class App extends Component {
     render() {
@@ -20,6 +21,7 @@ class App extends Component {
                     <Link to="/paginations" >分页器</Link>
                     <Link to="/switchs" >Switch</Link>
                     <Link to="/modals" >Modal</Link>
+                    <Link to="/dropdowns" >DropDown</Link>
                 </div>
                 <Switch>
                     <Route path="/" component={Home} exact={true} />
@@ -28,6 +30,7 @@ class App extends Component {
                     <Route path="/paginations" component={Paginations} />
                     <Route path="/switchs" component={Switchs} />
                     <Route path="/modals" component={Modals} />
+                    <Route path="/dropdowns" component={DropDowns} />
                 </Switch>
             </React.Fragment>
         );
