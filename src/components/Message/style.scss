@@ -1,6 +1,6 @@
 .ds-message {
     position: fixed;
-    top: 16px;
+    top: 0;
     width: 100%;
     left: 0;
     margin: 0;
@@ -16,19 +16,17 @@
         border-radius: 3px;
         font-size: 14px;
         padding: 0 12px;
-        line-height: 30px;
-        height: 30px;
+        // line-height: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
         box-sizing: border-box;
         overflow: hidden;
         color: rgba(black, .65);
-        &.info, &.error, &.success, &.warn {
-            padding-left: 36px;
-            position: relative;
-            svg {
-                position: absolute;
-                top: 8px;
-                left: 12px;
-            }
+        margin-top: 16px;
+        .ds-message-icon {
+            width: 20px;
+            margin-right: 8px;
         }
         &.dark {
             background-color: rgba(black, .7);
