@@ -28,6 +28,11 @@ export default class Img extends PureComponent {
         }
     }
     render() {
+        const { loaded } = this.state;
+        const { placeholder, ...rest } = this.props;
+        if (placeholder && !loaded) {
+            return <img {...rest} src={placeholder} />;
+        }
         return (
             <img ref={img => this.img = img} onClick={this.preview} {...this.props} />
         );

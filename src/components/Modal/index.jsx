@@ -8,6 +8,7 @@ export default class Modal extends PureComponent {
         maskClosable: true,
         closable: true,
         width: 768,
+        maskColor: 'rgba(0, 0, 0, 0.65)',
     }
     close = () => {
         const { maskClosable, onCancel } = this.props;
@@ -19,7 +20,7 @@ export default class Modal extends PureComponent {
         e.nativeEvent.stopImmediatePropagation();
     }
     render() {
-        const { visible, title, closable, width } = this.props;
+        const { visible, title, closable, width, maskColor } = this.props;
         return (
             <Transition 
                 items={visible}
@@ -29,7 +30,7 @@ export default class Modal extends PureComponent {
             >
                 {
                     (visible) => visible && ((props) => (
-                        <div className="ds-modal" onClick={this.close} style={{opacity: props.opacity}}>
+                        <div className="ds-modal" onClick={this.close} style={{opacity: props.opacity, backgroundColor: maskColor}}>
                             <div style={{width, opacity: props.opacity , transform: `translateY(${props.y})`}} className="ds-dialog" onClick={this.stop}>
                                 {
                                     title &&
