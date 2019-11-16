@@ -1,130 +1,47 @@
-$ds-btn-primary:#2196f3 !default;
-$ds-btn-secondary:#e10050 !default;
-
+$ds-button-theme: ("primary": #2196f3, "secondary": #e10050);
+.ds-button-basic {
+    min-height: 36px;
+    padding: 4px 16px;
+    border-radius: 4px;
+    border: 0;
+    outline: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.75;
+    color: rgba(black, 0.65);
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    overflow: hidden;
+}
 .ds-button {
-    min-height: 36px;
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 0;
-    outline: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
-    user-select: none;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
+    @mixin make-color($color: rgba(black, .87), $bg: rgb(224, 224, 224)) {
+        color: $color;
+        background-color: $bg;
+        &:hover {
+            background-color: darken($bg, 10%);
+        }
+    }
+
+    @extend .ds-button-basic;
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     &:active{
         box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
     }
-    &.primary {
-        background-color: $ds-btn-primary;
-        color: white;
-    }
-    &.secondary {
-        background-color: $ds-btn-secondary;
-        color: white;
-    }
-    &.outline {
-        background-color: transparent;
-        box-shadow: none;
-        border: 1px solid rgba(0, 0, 0, 0.23);
-        &.primary {
-            color: $ds-btn-primary;
-            border: 1px solid rgba($ds-btn-primary, 0.5);
-        }
-        &.secondary {
-            color: $ds-btn-secondary;
-            border: 1px solid rgba($ds-btn-secondary, 0.5);
-        }
-    }
-    &.text {
-        background-color: transparent;
-        box-shadow: none;
-        &.primary {
-            color: $ds-btn-primary;
-        }
-        &.secondary {
-            color: $ds-btn-secondary;
-        }
-    }
-}
-
-@mixin ds-btn-variant-color($color: #000) {
-    color: $color;
+    background-color: rgb(224, 224, 224);
     &:hover {
-        background-color: rgba($color, 0.08);
+        background-color: darken(rgb(224, 224, 224), 10%);
     }
-    .ds-btn-cover {
-        div {
-            background-color: rgba($color, .25);
+    @each $theme, $color in $ds-button-theme {
+        &.#{$theme} {
+            @include make-color(#fff, $color);
         }
-    }
-}
-
-@mixin ds-btn-default-color($color: rgba(black, .87), $bg: rgb(224, 224, 224), $cover: rgba(black, .25)) {
-    color: $color;
-    background-color: $bg;
-    &:hover {
-        background-color: darken($bg, 10%);
-    }
-    .ds-btn-cover div{
-        background-color: $cover;
-    }
-}
-
-.ds-btn {
-    min-height: 36px;
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 0;
-    outline: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
-    user-select: none;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    text-transform: uppercase;
-    &-cover {
-        position: absolute;
-        pointer-events: none;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
-        overflow: hidden;
-        display: block;
-        div {
-            border-radius: 50%;
-            position: absolute;
-        }
-    }
-}
-
-.ds-btn-default {
-    @extend .ds-btn;
-    &:active{
-        box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-    }
-    @include ds-btn-default-color();
-    &.primary {
-        @include ds-btn-default-color(#fff, $ds-btn-primary, rgba(white, .3));
-    }
-    &.secondary {
-        @include ds-btn-default-color(#fff, $ds-btn-secondary, rgba(white, .3));
     }
     &.disabled {
         pointer-events: none;
@@ -133,30 +50,35 @@ $ds-btn-secondary:#e10050 !default;
         background-color: rgba(0, 0, 0, 0.12);
     }
 }
-.ds-btn-text {
-    @extend .ds-btn;
-    background-color: transparent;
-    box-shadow: none;
-    @include ds-btn-variant-color;
-    &.primary {
-        @include ds-btn-variant-color($ds-btn-primary);
+.ds-button-link {
+    @mixin make-color($color: rgb()) {
+        color: $color;
+        &:hover {
+            background-color: rgba($color, 0.08);
+        }
     }
-    &.secondary {
-        @include ds-btn-variant-color($ds-btn-secondary);
+    @extend .ds-button-basic;
+    background-color: transparent;
+    &:hover {
+        background-color: rgba(black, 0.08);
+    }
+    @each $theme, $color in $ds-button-theme {
+        &.#{$theme} {
+            @include make-color($color);
+        }
     }
     &.disabled {
         pointer-events: none;
         color: rgba(0, 0, 0, .26);
     }
 }
-.ds-btn-outline {
-    @extend .ds-btn-text;
+.ds-button-outline {
+    @extend .ds-button-link;
     border: 1px solid rgba(0, 0, 0, 0.23);
-    &.primary {
-        border: 1px solid rgba($ds-btn-primary, 0.5);
-    }
-    &.secondary {
-        border: 1px solid rgba($ds-btn-secondary, 0.5);
+    @each $theme, $color in $ds-button-theme {
+        &.#{$theme} {
+            border: 1px solid rgba($color, 0.5);
+        }
     }
     &.disabled {
         border: 1px solid rgba(0, 0, 0, .23);

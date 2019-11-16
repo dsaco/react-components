@@ -4,7 +4,7 @@ import { Transition } from 'react-spring/renderprops';
 let key = 1;
 export default class Ripple extends React.PureComponent {
     static defaultProps = {
-        rippleColor: 'rgba(0, 0, 0, 0.3)',
+        color: 'rgba(0, 0, 0, 0.3)',
     }
     state = {
         top: 0,
@@ -54,7 +54,7 @@ export default class Ripple extends React.PureComponent {
     }
     render() {
         const { ripples } = this.state;
-        const { rippleColor } = this.props;
+        const { color } = this.props;
         return (
             <div style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden'}}
                 onMouseDown={this.onMouseDown} 
@@ -73,7 +73,7 @@ export default class Ripple extends React.PureComponent {
                         (item) => (props) => {
                             const { key, ...rest } = item;
                             return (
-                                <div style={{...rest, ...props, backgroundColor: rippleColor, position: 'absolute', pointerEvents: 'none', borderRadius: '50%' }} />
+                                <div style={{...rest, ...props, backgroundColor: color, position: 'absolute', pointerEvents: 'none', borderRadius: '50%' }} />
                             );
                         }
                     }
