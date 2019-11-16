@@ -5,13 +5,14 @@
 npm i -S ds-rc
 ```
 
-- [x] [Img](#Img)
-- [x] [Button](#Button)
 - [x] [Message](#Message)
+- [x] [Button](#Button)
+- [x] [Img](#Img)
 - [x] [Progress](#Progress)
-- [x] [Pagination](#Pagination)
-- [x] [Switch](#)
 - [x] [Modal](#)
+- [x] [Ripple](#)
+- [x] [Switch](#)
+- [x] [Pagination](#Pagination)
 - [ ] Select
 - [ ] Input
 - [ ] tagsInput

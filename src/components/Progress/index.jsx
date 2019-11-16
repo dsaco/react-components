@@ -1,29 +1,26 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 import { Transition } from 'react-spring/renderprops';
 
-class ProgressUi extends Component {
+class ProgressUi extends PureComponent {
     state = {
         percent: 0,
-        show: false,
+        visible: false,
     }
     start = () => {
-        const { show } = this.state;
-        if (!show) {
-            this.setState({show: true});
+        if (!this.state.visible) {
+            this.setState({visible: true});
             this.work();
         }
     }
     work = () => {
-        this.timer = setTimeout(() => {
-            const { percent } = this.state;
-            if (percent > 98) {
-                clearTimeout(this.timer);
-                return;
+        this.timer = setInterval(() => {
+            if (this.state.percent > 98) {
+                clearInterval(this.timer);
+            } else {
+                this.inc();
             }
-            this.inc();
-            this.work();
         }, 500);
     }
     inc = () => {
@@ -38,39 +35,36 @@ class ProgressUi extends Component {
         } else {
             mount = parseInt(Math.random() * 2);
         }
-        this.setState({
-            percent: percent + mount
-        })
+        this.setState({ percent: percent + mount });
     }
     done = () => {
-        clearTimeout(this.timer);
-        this.setState({
-            percent: 100,
-        }, () => {
-            setTimeout(() => {
-                this.setState({show: false}, () => {
-                    setTimeout(() => {
-                        this.setState({percent: 0});
-                    }, 300);
-                });
-            }, 300);
-        }) 
+        if (this.state.visible) {
+            clearInterval(this.timer);
+            this.setState({ percent: 100 }, () => {
+                setTimeout(() => {
+                    this.setState({visible: false}, () => {
+                        setTimeout(() => {
+                            this.setState({percent: 0});
+                        }, 300);
+                    });
+                }, 300);
+            });
+        }
     }
     render() {
-        const { percent, show } = this.state;
+        const { percent, visible } = this.state;
         return (
             <Transition
-                items={show}
+                items={visible}
                 from={{opacity: 0}}
                 enter={{opacity: 1}}
                 leave={{opacity: 0}}
             >
                 {
-                    (show) =>
-                    show && (
+                    (visible) => (visible) && (
                         (props) => (
                             <div style={props} className="ds-progress">
-                                <div style={{transform: `scaleX(${percent / 100})`}} className="ds-progress-inner"></div>
+                                <div style={{transform: `translate3d(${percent}%, 0, 0)`}} className="ds-progress-inner"></div>
                             </div>
                         )
                     )

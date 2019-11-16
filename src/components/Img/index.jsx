@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import { Spring, Transition } from 'react-spring/renderprops';
 
-export default class Img extends Component {
+export default class Img extends PureComponent {
     state = {
         loaded: false,
     }
@@ -34,7 +34,7 @@ export default class Img extends Component {
     }
 }
 
-class Modal extends Component {
+class Modal extends PureComponent {
     state = {
         show: false,
         src: '',

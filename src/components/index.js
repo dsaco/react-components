@@ -5,3 +5,4 @@ export { default as Progress } from './Progress';
 export { default as Pagination } from './Pagination';
 export { default as Modal } from './Modal';
 export { default as Switch } from './Switch';
+export { default as Ripple } from './Ripple';

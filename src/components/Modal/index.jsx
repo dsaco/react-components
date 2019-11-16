@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Transition } from 'react-spring/renderprops';
 import PropTypes from 'prop-types';
 
-export default class Modal extends Component {
+export default class Modal extends PureComponent {
     static defaultProps = {
         title: '',
         maskClosable: true,
