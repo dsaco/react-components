@@ -1,85 +1,51 @@
+.ds-body-no-scroll {
+    overflow: hidden;   
+}
+
 .ds-modal {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(black, .65);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    .ds-dialog {
-        background-color: white;
-        border-radius: 4px;
-        position: relative;
-        .ds-dialog-header {
-            padding: 16px 24px;
-            color: rgba(black, .85);
-            border-bottom: 1px solid #e8e8e8;
-            font-weight: 500;
-            font-size: 14px;
-        }
-        .ds-dialog-closable {
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 16px 24px;
-            font-size: 16px;
-            cursor: pointer;
-            svg {
-                fill: #777;
-                transition: fill .3s;
-            }
-            &:hover {
-                svg {
-                    fill: #000;
-                }
-            }
-        }
-        .ds-dialog-content {
-            padding: 16px 24px;
-            min-height: 100px;
-        }
-    }
-}
-
-
-.ds-mask {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(black, 0);
-    transition: background-color 0.3s;
-    min-width: 768px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    min-width: 768px;
+    overflow-x: hidden;
+    overflow-y: auto;
     &-content {
-        background-color: pink;
+        border-radius: 4px;
+        background-color: white;
+        position: relative;
+        overflow: hidden;
         min-height: 200px;
-        transition: all 0.3s;
-        width: 768px;
-        overflow-y: auto;
-    }
-    &.visible {
-        background-color: rgba(black, 0.65);
-        .ds-mask-content {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
+        .ds-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
-    &.hidden {
-        background-color: rgba(black, 0);
-        pointer-events: none;
-        .ds-mask-content {
-            transform: translate3d(0, -100%, 0);
-            opacity: 0;
+    &-header {
+        height: 50px;
+        padding-left: 16px;
+        border-bottom: 1px solid #eee;
+    }
+    .ds-modal-closable {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        cursor: pointer;
+        svg {
+            transition: fill .3s;
+            fill: rgba(black, 0.45);
+        }
+        &:hover {
+            svg {
+                fill: rgba(black, 0.65);
+            }
         }
     }
 }
