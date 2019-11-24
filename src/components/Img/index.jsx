@@ -1,159 +1,278 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Spring, Transition } from 'react-spring/renderprops';
+import { Spring, Transition, animated } from 'react-spring/renderprops';
 
-export default class Img extends PureComponent {
-    state = {
-        loaded: false,
-    }
-    componentDidMount() {
-        const { src } = this.props;
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-            this.setState({ loaded: true });
-        }
-    }
-    preview = (e) => {
-        const { loaded } = this.state;
-        if (loaded) {
-            const { x, y, width, height } = this.img.getBoundingClientRect();
-            getInst().open({
-                left: x,
-                top: y,
-                width,
-                height,
-                src: this.img.src,
-            })
-        }
-    }
-    render() {
-        const { loaded } = this.state;
-        const { placeholder, ...rest } = this.props;
-        if (placeholder && !loaded) {
-            return <img {...rest} src={placeholder} />;
-        }
-        return (
-            <img ref={img => this.img = img} onClick={this.preview} {...this.props} />
-        );
-    }
+export default function Img({
+	src,
+	placeholder,
+	style,
+	preview,
+	onClick,
+	...rest
+}) {
+	const [loaded, set] = React.useState(false);
+	const imgRef = React.useRef(null);
+	React.useEffect(() => {
+		const img = new Image();
+		img.src = src;
+		img.onload = () => {
+			set(true);
+		};
+	}, []);
+	const click = () => {
+		if (preview) {
+			view();
+		} else {
+			onClick && onClick();
+		}
+	};
+	const view = () => {
+		if (loaded) {
+			const {
+				x: left,
+				y: top,
+				width,
+				height,
+			} = imgRef.current.getBoundingClientRect();
+			getInst().open({
+				left,
+				top,
+				width,
+				height,
+				src,
+			});
+		}
+	};
+	if (placeholder && !loaded) {
+		return (
+			<div
+				{...rest}
+				style={{
+					...style,
+					display: 'inline-flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					backgroundColor: '#eee',
+				}}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="44"
+					height="44"
+					viewBox="0 0 44 44"
+					stroke="#fff"
+				>
+					<g fill="none" fillRule="evenodd" strokeWidth="2">
+						<circle cx="22" cy="22" r="17.3535">
+							<animate
+								attributeName="r"
+								begin="0s"
+								dur="1.8s"
+								values="1; 20"
+								calcMode="spline"
+								keyTimes="0; 1"
+								keySplines="0.165, 0.84, 0.44, 1"
+								repeatCount="indefinite"
+							/>
+							<animate
+								attributeName="stroke-opacity"
+								begin="0s"
+								dur="1.8s"
+								values="1; 0"
+								calcMode="spline"
+								keyTimes="0; 1"
+								keySplines="0.3, 0.61, 0.355, 1"
+								repeatCount="indefinite"
+							/>
+						</circle>
+						<circle cx="22" cy="22" r="19.9696">
+							<animate
+								attributeName="r"
+								begin="-0.9s"
+								dur="1.8s"
+								values="1; 20"
+								calcMode="spline"
+								keyTimes="0; 1"
+								keySplines="0.165, 0.84, 0.44, 1"
+								repeatCount="indefinite"
+							/>
+							<animate
+								attributeName="stroke-opacity"
+								begin="-0.9s"
+								dur="1.8s"
+								values="1; 0"
+								calcMode="spline"
+								keyTimes="0; 1"
+								keySplines="0.3, 0.61, 0.355, 1"
+								repeatCount="indefinite"
+							/>
+						</circle>
+					</g>
+					<script xmlns="" />
+				</svg>
+			</div>
+		);
+	} else if (loaded) {
+		return (
+			<img
+				src={src}
+				ref={imgRef}
+				style={style}
+				{...rest}
+				onClick={click}
+			/>
+		);
+	} else {
+		return null;
+	}
 }
+Img.defaultProps = {
+	placeholder: false,
+	style: {},
+	preview: false,
+};
 
-class Modal extends PureComponent {
-    state = {
-        show: false,
-        src: '',
-        newStyle: {},
-        style: {},
-    }
-    open = ({src, ...other}) => {
-        const clientWidth = document.documentElement.clientWidth;
-        const clientHeight = document.documentElement.clientHeight;
+class Modal extends React.PureComponent {
+	state = {
+		visible: false,
+		src: '',
+		style: {},
+		toStyle: {},
+	};
+	open = ({ src, left, top, width, height }) => {
+		const clientWidth = document.documentElement.clientWidth;
+		const clientHeight = document.documentElement.clientHeight;
+		document.body.classList.add('ds-body-no-scroll');
+		const img = new Image();
+		img.src = src;
+		img.onload = () => {
+			const iWidth = img.width;
+			const iHeight = img.height;
 
-        document.body.classList.add('body-no-scroll');
+			const offsetX = (clientWidth - width) / 2 - left;
+			const offsetY = (clientHeight - height) / 2 - top;
 
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-            const { left, top, width, height } = other;
+			let scaleW;
+			let scaleH;
 
-            let offsetX = (clientWidth - width) / 2 - left;
-            let offsetY = (clientHeight - height) / 2 - top;
-            let scaleW = img.width / width;
-            let scaleH = img.height / height;
+			const bigerWidth = iWidth > clientWidth;
+			const bigerHeight = iHeight > clientHeight;
 
-            if (img.width > clientWidth && img.height > clientHeight) {
-                if (img.width / img.height > clientWidth / clientHeight) {
-                    scaleW = clientWidth / width;
-                    scaleH = img.height / img.width * clientWidth / height;  
-                }else {
-                    scaleH = clientHeight / height;
-                    scaleW = img.width / img.height * clientHeight / width;  
-                }
-            } else if (img.width > clientWidth) {
-                scaleW = clientWidth / width;
-                scaleH = img.height / img.width * clientWidth / height;  
-            } else if (img.height > clientHeight) {
-                scaleH = clientHeight / height;
-                scaleW = img.width / img.height * clientHeight / width;  
-            }
-            this.setState({
-                show: true,
-                src,
-                style: {...other},
-                newStyle: { 
-                    offsetX,
-                    offsetY,
-                    scaleW,
-                    scaleH,
-                    opacity: 1,
-                },
-            });
-        }
-    }
-    close = () => {
-        this.setState({
-            newStyle: {
-                offsetX: 0,
-                offsetY: 0,
-                scaleW: 1,
-                scaleH: 1,
-                opacity: 0,
-            },
-            show: false,
-        });
-        document.body.classList.remove('body-no-scroll');
-    }
-    render() {
-        const { show, src, newStyle, style } = this.state;
-        const { offsetX, offsetY, scaleW, scaleH, opacity } = newStyle;
-
-        return (
-            <Transition
-                items={show}
-                from={{backgroundColor: 'rgba(0, 0, 0, 0)'}}
-                enter={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}
-                leave={{backgroundColor: 'rgba(0, 0, 0, 0)'}}
-            >
-                {
-                    show =>
-                    show && (
-                        props1 => (
-                            <div style={{
-                                position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-                                ...props1,
-                                }} onClick={this.close}>
-                                <Spring
-                                    from={{
-                                        transform: `translate(${0}px, ${0}px) scale(${1}, ${1})`, opacity: 1,
-                                    }}
-                                    to={{
-                                        transform: `translate(${offsetX}px, ${offsetY}px) scale(${scaleW}, ${scaleH})`, opacity,
-                                    }}
-                                >
-                                    {
-                                        props => (
-                                            <img style={{position: 'absolute', ...style, ...props}} src={src} />
-                                        )
-                                    }
-                                </Spring>
-                            </div>
-                        )
-                    )
-                }
-            </Transition>
-        )
-    }
+			if (bigerWidth && bigerHeight) {
+				if (iWidth / iHeight > clientWidth / clientHeight) {
+					scaleW = clientWidth / width;
+					scaleH = ((iHeight / iWidth) * clientWidth) / height;
+				} else {
+					scaleH = clientHeight / height;
+					scaleW = ((iWidth / iHeight) * clientHeight) / width;
+				}
+			} else if (bigerWidth) {
+				scaleW = clientWidth / width;
+				scaleH = ((iHeight / iWidth) * clientWidth) / height;
+			} else if (bigerHeight) {
+				scaleH = clientHeight / height;
+				scaleW = ((iWidth / iHeight) * clientHeight) / width;
+			} else {
+				scaleW = iWidth / width;
+				scaleH = iHeight / height;
+			}
+			this.setState({
+				src,
+				style: { left, top, width, height },
+				toStyle: {
+					offsetX,
+					offsetY,
+					scaleW,
+					scaleH,
+				},
+				visible: true,
+			});
+		};
+	};
+	close = () => {
+		this.setState(
+			{
+				toStyle: {
+					offsetX: 0,
+					offsetY: 0,
+					scaleW: 1,
+					scaleH: 1,
+				},
+				visible: false,
+			},
+			() => {
+				document.body.classList.remove('ds-body-no-scroll');
+			}
+		);
+	};
+	render() {
+		const { visible, src, style, toStyle } = this.state;
+		return (
+			<Transition
+				items={visible}
+				from={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+				enter={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+				leave={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+			>
+				{(item) =>
+					item &&
+					((props) => {
+						return (
+							<animated.div
+								style={{
+									position: 'fixed',
+									top: 0,
+									left: 0,
+									right: 0,
+									bottom: 0,
+									...props,
+								}}
+								onClick={this.close}
+							>
+								<Spring
+									from={{
+										offsetX: 0,
+										offsetY: 0,
+										scaleW: 1,
+										scaleH: 1,
+									}}
+									to={{
+										offsetX: toStyle.offsetX,
+										offsetY: toStyle.offsetY,
+										scaleW: toStyle.scaleW,
+										scaleH: toStyle.scaleH,
+									}}
+								>
+									{(props) => {
+										return (
+											<animated.img
+												style={{
+													...style,
+													position: 'absolute',
+													transform: `translate3d(${props.offsetX}px, ${props.offsetY}px, 0) scale3d(${props.scaleW}, ${props.scaleH}, 1)`,
+												}}
+												src={src}
+											/>
+										);
+									}}
+								</Spring>
+							</animated.div>
+						);
+					})
+				}
+			</Transition>
+		);
+	}
 }
 
 let modalInstance;
 
 function getInst() {
-    if (modalInstance) {
-        return modalInstance;
-    } else {
-        const div = document.createElement('div');
-        document.body.appendChild(div);
-        return modalInstance = ReactDOM.render(<Modal />, div);
-    }
+	if (modalInstance) {
+		return modalInstance;
+	} else {
+		const div = document.createElement('div');
+		document.body.appendChild(div);
+		return (modalInstance = ReactDOM.render(<Modal />, div));
+	}
 }
