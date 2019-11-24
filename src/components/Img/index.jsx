@@ -8,6 +8,10 @@ export default function Img({
 	style,
 	preview,
 	onClick,
+	maxWidth,
+	maxHeight,
+	width,
+	height,
 	...rest
 }) {
 	const [loaded, set] = React.useState(false);
@@ -44,11 +48,33 @@ export default function Img({
 		}
 	};
 	if (placeholder && !loaded) {
+		let auto = {};
+		if (maxWidth && maxHeight && width && height) {
+			if (width > maxWidth && height > maxHeight) {
+				if (width / height > maxWidth / maxHeight) {
+					auto.width = maxWidth;
+					auto.height = height / width * maxWidth;
+				} else {
+					auto.height = maxHeight;
+					auto.width = width / height * maxHeight;
+				}
+			} else if (width > maxWidth) {
+				auto.width = maxWidth;
+				auto.height = height / width * maxWidth;
+			} else if (height > maxHeight) {
+				auto.height = maxHeight;
+				auto.width = width / height * maxHeight;
+			} else {
+				auto.width = width;
+				auto.height = height;
+			}
+		}
 		return (
 			<div
 				{...rest}
 				style={{
 					...style,
+					...auto,
 					display: 'inline-flex',
 					justifyContent: 'center',
 					alignItems: 'center',
