@@ -8,8 +8,8 @@ export default function Img({
 	style,
 	preview,
 	onClick,
-	maxWidth,
-	maxHeight,
+	maxwidth,
+	maxheight,
 	width,
 	height,
 	...rest
@@ -49,21 +49,21 @@ export default function Img({
 	};
 	if (placeholder && !loaded) {
 		let auto = {};
-		if (maxWidth && maxHeight && width && height) {
-			if (width > maxWidth && height > maxHeight) {
-				if (width / height > maxWidth / maxHeight) {
-					auto.width = maxWidth;
-					auto.height = height / width * maxWidth;
+		if (maxwidth && maxheight && width && height) {
+			if (width > maxwidth && height > maxheight) {
+				if (width / height > maxwidth / maxheight) {
+					auto.width = maxwidth;
+					auto.height = height / width * maxwidth;
 				} else {
-					auto.height = maxHeight;
-					auto.width = width / height * maxHeight;
+					auto.height = maxheight;
+					auto.width = width / height * maxheight;
 				}
-			} else if (width > maxWidth) {
-				auto.width = maxWidth;
-				auto.height = height / width * maxWidth;
-			} else if (height > maxHeight) {
-				auto.height = maxHeight;
-				auto.width = width / height * maxHeight;
+			} else if (width > maxwidth) {
+				auto.width = maxwidth;
+				auto.height = height / width * maxwidth;
+			} else if (height > maxheight) {
+				auto.height = maxheight;
+				auto.width = width / height * maxheight;
 			} else {
 				auto.width = width;
 				auto.height = height;

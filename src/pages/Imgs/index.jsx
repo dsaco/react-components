@@ -8,8 +8,8 @@ export default class extends Component {
             <div>
                 <div style={{width: 200, maxHeight: 200}}>
                     <Img 
-                        maxWidth={200} 
-                        maxHeight={200} 
+                        maxwidth={200} 
+                        maxheight={200} 
                         width={1080}
                         height={1920}
                         style={{maxWidth: 200, maxHeight: 200}}
