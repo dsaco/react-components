@@ -10,6 +10,7 @@
     bottom: 0;
     overflow-x: hidden;
     overflow-y: auto;
+    z-index: 1000;
     &-content {
         border-radius: 4px;
         background-color: white;
